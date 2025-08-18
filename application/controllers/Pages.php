@@ -79,14 +79,16 @@
                 show_404();
             }
             if($this->session->admin_login){
-                redirect(base_url()."adminmain");
+                redirect(base_url()."admin_main");
             }
-            $this->load->view('pages/admin/'.$page);            
+            $this->load->view('templates/admin/header'); 
+            $this->load->view('pages/admin/'.$page);  
+            $this->load->view('templates/admin/footer');          
         }
         public function admin_authenticate(){
             $username=$this->input->post('username');
             $password=$this->input->post('password');
-            $authenticate=$this->Payroll_model->admin_authenticate($username,$password);
+            $authenticate=$this->Tourism_model->admin_authenticate($username,$password);
             if($authenticate){
                 $user_data = array(
                     'username' => $username,
@@ -112,12 +114,17 @@
                 redirect(base_url('admin'));
             }            
             $data['title'] = "Dashboard";            
-            $this->load->view('templates/admin/header');
-            $this->load->view('templates/admin/navbar');
+            $this->load->view('templates/admin/header');            
             $this->load->view('templates/admin/sidebar');
-            $this->load->view('pages/'.$page,$data);
+            $this->load->view('templates/admin/navbar');
+            $this->load->view('pages/admin/'.$page,$data);
             $this->load->view('templates/admin/modal');
             $this->load->view('templates/admin/footer');
+        }
+        public function adminlogout(){
+            $data=array('username','fullname','admin_login');
+            $this->session->unset_userdata($data);
+            redirect(base_url('admin'));
         }
         //======================================Admin Module====================================================
     }

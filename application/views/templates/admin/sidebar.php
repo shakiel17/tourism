@@ -1,113 +1,32 @@
-<aside id="sidebar" class="sidebar">
-
-    <ul class="sidebar-nav" id="sidebar-nav">
-
-      <li class="nav-item">
-        <a class="nav-link " href="<?=base_url();?>main">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="<?=base_url();?>manage_employee">
-          <i class="bi bi-person"></i>
-          <span>Employee</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Transactions</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="<?=base_url();?>manage_trainee">
-              <i class="bi bi-circle"></i><span>Trainee</span>
-            </a>
-          </li>
-          <li>
-            <a href="<?=base_url();?>manage_expenses">
-              <i class="bi bi-circle"></i><span>Expenses</span>
-            </a>
-          </li>
-          <li>
-            <a href="<?=base_url();?>manage_deposit">
-              <i class="bi bi-circle"></i><span>Bank Deposit</span>
-            </a>
-          </li>
-          <li>
-            <a href="<?=base_url();?>manage_balances">
-              <i class="bi bi-circle"></i><span>Balances & Others</span>
-            </a>
-          </li>
-          <li>
-            <a href="<?=base_url();?>manage_advances">
-              <i class="bi bi-circle"></i><span>Advances</span>
-            </a>
-          </li>          
-        </ul>
-      </li><!-- End Components Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>Reports</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="<?=base_url();?>manage_payroll">
-              <i class="bi bi-circle"></i><span>Payroll</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#generateEnrollee">
-              <i class="bi bi-circle"></i><span>Enrollee</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#generateExpenses">
-              <i class="bi bi-circle"></i><span>Consolidated Report</span>
-            </a>
-          </li>                    
-        </ul>
-      </li><!-- End Forms Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-layout-text-window-reverse"></i><span>Settings</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="<?=base_url();?>manage_agent">
-              <i class="bi bi-circle"></i><span>Agent</span>
-            </a>
-          </li>
-          <li>
-            <a href="<?=base_url();?>manage_branch">
-              <i class="bi bi-circle"></i><span>Branch</span>
-            </a>
-          </li>
-          <li>
-            <a href="<?=base_url();?>manage_designation">
-              <i class="bi bi-circle"></i><span>Designation</span>
-            </a>
-          </li>
-          <?php
-            if($this->session->is_admin==1){
-          ?>
-          <li>
-            <a href="<?=base_url();?>manage_users">
-              <i class="bi bi-circle"></i><span>User Manager</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#managecomputation">
-              <i class="bi bi-circle"></i><span>Computation</span>
-            </a>
-          </li>
-          <?php
-            }
-          ?>          
-        </ul>
-      </li><!-- End Tables Nav -->
-    </ul>
-
-  </aside><!-- End Sidebar-->
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-light navbar-light">
+                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>TOURISM</h3>
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="position-relative">
+                        <img class="rounded-circle" src="<?=base_url('design/assets/admin/img/user.jpg');?>" alt="" style="width: 40px; height: 40px;">
+                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0"><?=$this->session->fullname;?></h6>
+                        <span>Admin</span>
+                    </div>
+                </div>
+                <div class="navbar-nav w-100">
+                    <a href="<?=base_url('admin_main');?>" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="<?=base_url('stablishment');?>" class="nav-item nav-link"><i class="fa fa-building me-2"></i>Stablishment</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-cogs me-2"></i>Settings</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="signin.html" class="dropdown-item">Registration</a>
+                            <a href="signup.html" class="dropdown-item">About Us</a>
+                            <a href="404.html" class="dropdown-item">Contact Us</a>
+                            <a href="blank.html" class="dropdown-item">Home Image</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
