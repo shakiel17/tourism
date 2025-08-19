@@ -98,6 +98,60 @@ LOCK TABLES `company_gallery` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `gallery`
+--
+
+DROP TABLE IF EXISTS `gallery`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `gallery` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `image` longblob,
+  `is_featured` int DEFAULT '0',
+  `is_background` int DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `gallery`
+--
+
+LOCK TABLES `gallery` WRITE;
+/*!40000 ALTER TABLE `gallery` DISABLE KEYS */;
+/*!40000 ALTER TABLE `gallery` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `settings`
+--
+
+DROP TABLE IF EXISTS `settings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `settings` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `website_name` varchar(200) DEFAULT NULL,
+  `website_logo` longblob,
+  `about_us` text,
+  `contactno` varchar(45) DEFAULT NULL,
+  `address` text,
+  `email` varchar(100) DEFAULT NULL,
+  `location` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `settings`
+--
+
+LOCK TABLES `settings` WRITE;
+/*!40000 ALTER TABLE `settings` DISABLE KEYS */;
+/*!40000 ALTER TABLE `settings` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -131,4 +185,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-18  9:42:40
+-- Dump completed on 2025-08-19  8:30:37

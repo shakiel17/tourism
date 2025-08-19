@@ -6,13 +6,17 @@
         //======================================User Module=======================================================
         public function index(){
             $page = "index";
-            if(!file_exists(APPPATH.'views/pages/'.$page.".php")){
+            if(!file_exists(APPPATH.'views/pages/user/'.$page.".php")){
                 show_404();
             }
             if($this->session->user_login){
                 redirect(base_url()."main");
             }
-            $this->load->view('pages/'.$page);            
+
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');            
+            $this->load->view('pages/user/'.$page);            
+            $this->load->view('templates/footer');        
         }
         public function authenticate(){
             $username=$this->input->post('username');
