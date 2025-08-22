@@ -106,6 +106,7 @@ DROP TABLE IF EXISTS `gallery`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `gallery` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `description` text,
   `image` longblob,
   `is_featured` int DEFAULT '0',
   `is_background` int DEFAULT '0',
@@ -139,7 +140,7 @@ CREATE TABLE `settings` (
   `email` varchar(100) DEFAULT NULL,
   `location` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,6 +149,7 @@ CREATE TABLE `settings` (
 
 LOCK TABLES `settings` WRITE;
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
+INSERT INTO `settings` VALUES (1,'KC Tourism',NULL,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, dolorum, doloribus sunt dicta, officia voluptatibus libero necessitatibus natus impedit quam ullam assumenda? Id atque iste consectetur. Commodi odit ab saepe!\r\n\r\nLorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium quos voluptatem suscipit neque enim, doloribus ipsum rem eos distinctio, dignissimos nisi saepe nulla? Libero numquam perferendis provident placeat molestiae quia?','09107524284','Laurel St, Kidapawan City, Cotabato','hisoka.aboy@gmail.com','<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15840.041319202686!2d125.07999011817746!3d7.008065885838628!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32f8f90e91ab3089%3A0x1ee2ad7307e69342!2sKIDAPAWAN%20CITY%20TOURISM%20AND%20PROMOTIONS%20OFFICE!5e0!3m2!1sen!2sph!4v1755827489783!5m2!1sen!2sph\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,4 +187,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-19  8:30:37
+-- Dump completed on 2025-08-22 11:42:39
