@@ -50,12 +50,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 //===========================Admin Route=========================
+$route['save_home_image'] = 'pages/save_home_image';
+$route['manage_home_image'] = 'pages/manage_home_image';
+$route['save_about_us'] = 'pages/save_about_us';
+$route['manage_about_us'] = 'pages/manage_about_us';
 $route['adminlogout'] = 'pages/adminlogout';
 $route['admin_main'] = 'pages/admin_main';
 $route['admin_authenticate'] = 'pages/admin_authenticate';
 $route['admin'] = 'pages/admin';
 //===========================Company Route=======================
 //===========================User Route==========================
+$route['about'] = 'pages/about';
 $route['default_controller'] = 'pages/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
