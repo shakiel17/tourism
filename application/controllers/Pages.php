@@ -12,6 +12,7 @@
             $data['detail'] = $this->Tourism_model->getSettings();
             $data['home'] = 'active';
             $data['about'] = '';
+            $data['carousel'] = $this->Tourism_model->getAllHomeImages();
             $this->load->view('templates/header');
             $this->load->view('templates/navbar',$data);            
             $this->load->view('pages/user/'.$page,$data);            

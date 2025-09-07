@@ -55,5 +55,42 @@
             $result=$this->db->query("SELECT * FROM gallery");
             return $result->result_array();
         }
+        public function save_home_image(){
+            $id=$this->input->post('id');
+            $description=$this->input->post('description');
+            $is_featured=$this->input->post('is_featured');
+            $is_background=$this->input->post('is_background');
+            if($_FILES["file"]["name"] != ""){
+                $fileName=basename($_FILES["file"]["name"]);
+                $fileType=pathinfo($fileName, PATHINFO_EXTENSION);
+                $allowTypes = array('jpg','png','jpeg','gif');
+                if(in_array($fileType,$allowTypes)){
+                    $image = $_FILES["file"]["tmp_name"];
+                    $imgContent=addslashes(file_get_contents($image));
+                    if($id==""){
+                        $result=$this->db->query("INSERT INTO gallery(`description`,`image`,is_featured,is_background) VALUES('$description','$imgContent','$is_featured','$is_background')");
+                    }else{
+                        $result=$this->db->query("UPDATE gallery SET `description`='$description',`image`='$imgContent',is_feactured='$is_featured',is_background='$is_background' WHERE id='$id'");
+                    }
+                }else{
+                    return false;
+                }
+            }else{
+                if($id==""){
+                    $result=$this->db->query("INSERT INTO gallery(`description`,is_featured,is_background) VALUES('$description','$is_featured','$is_background')");
+                }else{
+                    $result=$this->db->query("UPDATE gallery SET `description`='$description',is_featured='$is_featured',is_background='$is_background' WHERE id='$id'");
+                }
+            }
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function getAllHomeImages(){
+            $result=$this->db->query("SELECT * FROM gallery");
+            return $result->result_array();
+        }
     }
 ?>

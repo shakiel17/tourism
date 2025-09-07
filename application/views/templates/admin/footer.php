@@ -14,6 +14,30 @@
 
     <!-- Template Javascript -->
     <script src="<?=base_url('design/assets/admin/js/main.js');?>"></script>
+    <script>
+        $('.addHomeImage').click(function(){
+            document.getElementById('home_image_id').value="";
+            document.getElementById('home_image_description').value="";
+            document.getElementById('home_image_is_featured').checked=false;
+            document.getElementById('home_image_is_background').checked=false;
+        });
+        $('.editHomeImage').click(function(){
+            var data=$(this).data('id');
+            var id=data.split('_');
+            document.getElementById('home_image_id').value=id[0];
+            document.getElementById('home_image_description').value=id[1];
+            if(id[2] == 1){
+                document.getElementById('home_image_is_featured').checked=true;
+            }else{
+                document.getElementById('home_image_is_featured').checked=false;
+            }
+            if(id[3] == 1){
+                document.getElementById('home_image_is_background').checked=true;
+            }else{
+                document.getElementById('home_image_is_background').checked=false;
+            }
+        });
+    </script>
 </body>
 
 </html>
