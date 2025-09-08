@@ -51,28 +51,56 @@
                             <a href="#" class="dropdown-item text-center">See all message</a>
                         </div>
                     </div> -->
+                    <?php
+                    $company=$this->Tourism_model->getAllStablishment('pending');
+                    $new="";
+                    if(count($company) > 0){
+                        $new="style='animation:blinker 1s linear infinite;';";
+                    }
+                    ?>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" <?=$new;?>>
                             <i class="fa fa-bell me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Notificatin</span>
+                            <span class="d-none d-lg-inline-flex">New Application</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                            <?php
+                            foreach($company as $item){
+                                $date_applied=new DateTime($item['datearray']." ".$item['timearray']);
+                                $date_today=new DateTime(date('Y-m-d H:i:s'));
+                                $interval=$date_applied->diff($date_today);
+                                $days = $interval->days; // Total number of days between the two dates
+                                $years = $interval->y;
+                                $months = $interval->m;
+                                $remaining_days = $interval->d; // Days within the current month/year segment
+                                $hours = $interval->h;
+                                $minutes = $interval->i;
+                                $seconds = $interval->s;
+                                if($years>0){
+                                    $remarks=$years." years";
+                                }else if($months > 0){
+                                    $remarks=$months." months";
+                                }else if($days > 0){
+                                    $remarks=$days." days";
+                                }else if($hours>0){
+                                    $remarks=$hours." hours";
+                                }else if($minutes > 0){
+                                    $remarks=$minutes." minutes";
+                                }else{
+                                    $remarks=$seconds." seconds";
+                                }
+                                   
+
+                            ?>
                             <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Profile updated</h6>
-                                <small>15 minutes ago</small>
+                                <h6 class="fw-normal mb-0"><?=$item['companyname'];?></h6>
+                                <small><?=$remarks;?></small>
                             </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">New user added</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">Password changed</h6>
-                                <small>15 minutes ago</small>
-                            </a>
-                            <hr class="dropdown-divider">
-                            <a href="#" class="dropdown-item text-center">See all notifications</a>
+                            <hr class="dropdown-divider"> 
+                            <?php
+                            }
+                            ?>                           
+                            <a href="<?=base_url('manage_company_registration');?>" class="dropdown-item text-center">See all application</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">

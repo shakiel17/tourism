@@ -26,6 +26,7 @@
             $data['detail'] = $this->Tourism_model->getSettings();
             $data['home'] = '';
             $data['about'] = 'active';
+            $data['carousel'] = $this->Tourism_model->getAllHomeImages();
             $this->load->view('templates/header');
             $this->load->view('templates/navbar',$data);            
             $this->load->view('pages/user/'.$page,$data);            
@@ -33,7 +34,24 @@
         }
         //======================================User Module=======================================================
         //======================================Company Module====================================================
-
+        public function register(){
+            $page = "register";
+            if(!file_exists(APPPATH.'views/pages/user/'.$page.".php")){
+                show_404();
+            }
+            $this->load->view('pages/user/'.$page);             
+        }
+        public function registration(){
+            $register=$this->Tourism_model->registration();
+            echo "<script>";
+            if($register){
+                echo "alert('Registration details successfully submitted! Thank you for your interest. Please wait for the administrator to approve or decline your application.');";
+            }else{
+                echo "alert('Unable to submit registration!');";
+            }
+                echo "window.location='".base_url('register')."';";
+            echo "</script>";
+        }
         //======================================Company Module====================================================
 
         //======================================Admin Module====================================================
@@ -144,9 +162,58 @@
             if($save){
                 $this->session->set_flashdata('success','Image details successfully updated!');
             }else{
-                $this->session->set_flashdata('failed','Unbale to update iamge details!');
+                $this->session->set_flashdata('failed','Unbale to update image details!');
             }
             redirect(base_url('manage_home_image'));
+        }
+        public function stablishment(){
+            $page = "stablishment";
+            if(!file_exists(APPPATH.'views/pages/admin/'.$page.".php")){
+                show_404();
+            }             
+            if($this->session->admin_login){
+
+            }else{
+                $this->session->set_flashdata('error','You are not logged in!');
+                redirect(base_url('admin'));
+            }            
+            $data['title'] = "Stablishment List"; 
+            $data['items'] = $this->Tourism_model->getAllStablishment('Approved');
+            $this->load->view('templates/admin/header');            
+            $this->load->view('templates/admin/sidebar');
+            $this->load->view('templates/admin/navbar');
+            $this->load->view('pages/admin/'.$page,$data);
+            $this->load->view('templates/admin/modal');
+            $this->load->view('templates/admin/footer');
+        }
+        public function manage_company_registration(){
+            $page = "company_registration";
+            if(!file_exists(APPPATH.'views/pages/admin/'.$page.".php")){
+                show_404();
+            }             
+            if($this->session->admin_login){
+
+            }else{
+                $this->session->set_flashdata('error','You are not logged in!');
+                redirect(base_url('admin'));
+            }            
+            $data['title'] = "Stablishment Application"; 
+            $data['items'] = $this->Tourism_model->getAllStablishment('pending');
+            $this->load->view('templates/admin/header');            
+            $this->load->view('templates/admin/sidebar');
+            $this->load->view('templates/admin/navbar');
+            $this->load->view('pages/admin/'.$page,$data);
+            $this->load->view('templates/admin/modal');
+            $this->load->view('templates/admin/footer');
+        }
+        public function update_application($id,$status){
+            $save=$this->Tourism_model->update_application($id,$status);
+            if($save){
+                $this->session->set_flashdata('success','Application status successfully updated!');
+            }else{
+                $this->session->set_flashdata('failed','Unbale to update application status!');
+            }
+            redirect(base_url('manage_company_registration'));
         }
         //======================================Admin Module====================================================
     }

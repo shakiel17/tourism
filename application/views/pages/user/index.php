@@ -9,6 +9,7 @@
                         <?php
                         $ismain=" active";
                         foreach($carousel as $item){
+                            if($item['is_featured']==1){
                         ?>
                         <div class="carousel-item<?=$ismain;?>">
                             <img src='data:image/jpg;charset=utf8;base64,<?=base64_encode($item['image']);?>' class="img-fluid" alt="Image">
@@ -26,6 +27,7 @@
                         </div>
                         <?php
                         $ismain="";
+                            }
                         }
                         ?>                    
                     </div>

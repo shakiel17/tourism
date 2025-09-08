@@ -92,5 +92,48 @@
             $result=$this->db->query("SELECT * FROM gallery");
             return $result->result_array();
         }
+        public function getAllStablishment($status){
+            $result=$this->db->query("SELECT * FROM company WHERE `status`='$status'");
+            return $result->result_array();
+        }
+        public function registration(){
+            $company_id=date('YmdHis');
+            $companyname=$this->input->post('companyname');
+            $description=$this->input->post('description');
+            $address=$this->input->post('address');
+            $contactno=$this->input->post('contactno');
+            $email=$this->input->post('email');
+            $facebook=$this->input->post('facebook');
+            $loc=$this->input->post('loc');
+            $username=$this->input->post('username');
+            $password=$this->input->post('password');
+            $date=date('Y-m-d');
+            $time=date('H:i:s');
+            $check=$this->db->query("SELECT * FROM company WHERE companyname='$companyname' AND `status`='Approved'");
+            if($check->num_rows()>0){
+                return false;
+            }else{
+                $check=$this->db->query("SELECT * FROM users WHERE username='$username' AND company_id <> '$company_id'");
+                if($check->num_rows()>0){
+                    return false;
+                }else{
+                    $result=$this->db->query("INSERT INTO company(company_id,companyname,`description`,`address`,contactno,email,facebook,`location`) VALUES('$company_id','$companyname','$description','$address','$contactno','$email','$facebook','$loc')");
+                }                
+            }
+            if($result){
+                $this->db->query("INSERT INTO users(username,`password`,company_id) VALUES('$username','$password','$company_id')");
+                return true;
+            }else{
+                return false;
+            }            
+        }
+        public function update_application($id,$status){
+            $result=$this->db->query("UPDATE company SET `status`='$status' WHERE company_id='$id'");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 ?>

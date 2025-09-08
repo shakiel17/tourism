@@ -29,6 +29,13 @@
 
     <!-- Template Stylesheet -->
     <link href="<?=base_url('design/assets/admin/css/style.css');?>" rel="stylesheet">
+    <style>
+        @keyframes blinker {
+        50% {
+            opacity: 0;
+        }
+    }
+    </style>
 </head>
 
 <body>

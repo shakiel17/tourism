@@ -21,7 +21,8 @@
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="footer-item d-flex flex-column">
                             <h4 class="mb-4 text-white">Company</h4>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> Register</a>
+                            <a href="<?=base_url('register');?>"><i class="fas fa-angle-right me-2"></i> Register</a>
+                            <a href="<?=base_url('login');?>"><i class="fas fa-angle-right me-2"></i> Login</a>
                             <!-- <a href=""><i class="fas fa-angle-right me-2"></i> Careers</a>
                             <a href=""><i class="fas fa-angle-right me-2"></i> Blog</a>
                             <a href=""><i class="fas fa-angle-right me-2"></i> Press</a>

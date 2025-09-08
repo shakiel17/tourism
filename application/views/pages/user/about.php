@@ -16,7 +16,15 @@
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-5">
                         <div class="h-100" style="border: 50px solid; border-color: transparent #13357B transparent #13357B;">
-                            <img src="<?=base_url('design/assets/user/img/about-img.jpg');?>" class="img-fluid w-100 h-100" alt="">
+                            <?php
+                            $background="";
+                            foreach($carousel as $row){
+                                if($row['is_background']==1){
+                                    $background="<img src='data:image/jpg;charset=utf8;base64,".base64_encode($row['image'])."' class='img-fluid w-100 h-100' alt=''>";
+                                }
+                            }
+                            ?>     
+                            <?=$background;?>                       
                         </div>
                     </div>
                     <div class="col-lg-7" style="background: linear-gradient(rgba(255, 255, 255, .8), rgba(255, 255, 255, .8)), url(img/about-img-1.png);">
