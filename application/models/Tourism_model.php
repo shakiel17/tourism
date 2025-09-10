@@ -5,7 +5,7 @@
             $this->load->database();
         }
         public function authenticate($username,$password){
-            $result=$this->db->query("SELECT * FROM users WHERE username ='$username' AND `password` ='$password'");
+            $result=$this->db->query("SELECT u.username,c.companyname,c.company_id FROM users u INNER JOIN company c ON c.company_id=u.company_id WHERE u.username ='$username' AND u.`password` ='$password'");
             if($result->num_rows() > 0){
                 return $result->row_array();
             }else{
@@ -129,6 +129,34 @@
         }
         public function update_application($id,$status){
             $result=$this->db->query("UPDATE company SET `status`='$status' WHERE company_id='$id'");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public function getAllStablishmentGallery(){
+            $result=$this->db->query("SELECT cg.images,c.* FROM company_gallery cg INNER JOIN company c ON c.company_id=cg.company_id WHERE c.status='Approved'");
+            return $result->result_array();
+        }
+        public function getStablishmentGallery($id){
+            $result=$this->db->query("SELECT cg.images,c.*,cg.id as img_id FROM company_gallery cg INNER JOIN company c ON c.company_id=cg.company_id WHERE c.status='Approved' AND c.company_id='$id'");
+            return $result->result_array();
+        }       
+        public function save_gallery(){
+            $id=$this->session->company_id;            
+            if($_FILES["file"]["name"] != ""){
+                $fileName=basename($_FILES["file"]["name"]);
+                $fileType=pathinfo($fileName, PATHINFO_EXTENSION);
+                $allowTypes = array('jpg','png','jpeg','gif');
+                if(in_array($fileType,$allowTypes)){
+                    $image = $_FILES["file"]["tmp_name"];
+                    $imgContent=addslashes(file_get_contents($image));                    
+                    $result=$this->db->query("INSERT INTO company_gallery(company_id,`images`) VALUES('$id','$imgContent')");                    
+                }else{
+                    return false;
+                }
+            }
             if($result){
                 return true;
             }else{

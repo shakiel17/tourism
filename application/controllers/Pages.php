@@ -13,6 +13,8 @@
             $data['home'] = 'active';
             $data['about'] = '';
             $data['carousel'] = $this->Tourism_model->getAllHomeImages();
+            $data['gallery'] = $this->Tourism_model->getAllStablishment('Approved');
+            $data['company_gallery'] = $this->Tourism_model->getAllStablishmentGallery();
             $this->load->view('templates/header');
             $this->load->view('templates/navbar',$data);            
             $this->load->view('pages/user/'.$page,$data);            
@@ -51,6 +53,93 @@
             }
                 echo "window.location='".base_url('register')."';";
             echo "</script>";
+        }
+        public function login(){
+            $page = "login";
+            if(!file_exists(APPPATH.'views/pages/company/'.$page.".php")){
+                show_404();
+            }
+            $this->load->view('pages/company/'.$page);             
+        }
+        public function authenticate(){
+            $username=$this->input->post('username');
+            $password=$this->input->post('password');
+            $authenticate=$this->Tourism_model->authenticate($username,$password);
+            if($authenticate){
+                $user_data = array(
+                    'username' => $username,
+                    'company_id' => $authenticate['company_id'],
+                    'fullname' => $authenticate['companyname'],
+                    'user_login' => true
+                );
+                $this->session->set_userdata($user_data);
+                redirect(base_url('main'));
+            }else{
+                $this->session->set_flashdata('error','Invalid username or password!');
+                redirect(base_url('login'));
+            }
+        }
+        public function main(){
+            $page = "main";
+            if(!file_exists(APPPATH.'views/pages/company/'.$page.".php")){
+                show_404();
+            }             
+            if($this->session->user_login){
+
+            }else{
+                $this->session->set_flashdata('error','You are not logged in!');
+                redirect(base_url('login'));
+            }            
+            $data['title'] = "Dashboard";            
+            $this->load->view('templates/company/header');            
+            $this->load->view('templates/company/sidebar');
+            $this->load->view('templates/company/navbar');
+            $this->load->view('pages/company/'.$page,$data);
+            $this->load->view('templates/company/modal');
+            $this->load->view('templates/company/footer');
+        }
+        public function logout(){
+            $data=array('username','fullname','user_login');
+            $this->session->unset_userdata($data);
+            redirect(base_url('login'));
+        }
+        public function company_gallery(){
+            $page = "gallery";
+            if(!file_exists(APPPATH.'views/pages/company/'.$page.".php")){
+                show_404();
+            }             
+            if($this->session->user_login){
+
+            }else{
+                $this->session->set_flashdata('error','You are not logged in!');
+                redirect(base_url('login'));
+            }            
+            $data['title'] = "My Gallery";            
+            $data['items'] = $this->Tourism_model->getStablishmentGallery($this->session->company_id);
+            $this->load->view('templates/company/header');            
+            $this->load->view('templates/company/sidebar');
+            $this->load->view('templates/company/navbar');
+            $this->load->view('pages/company/'.$page,$data);
+            $this->load->view('templates/company/modal');
+            $this->load->view('templates/company/footer');
+        }
+        public function save_gallery(){
+            $save=$this->Tourism_model->save_gallery();
+            if($save){
+                $this->session->set_flashdata('success','Image details successfully saved!');
+            }else{
+                $this->session->set_flashdata('failed','Unbale to save image details!');
+            }
+            redirect(base_url('company_gallery'));
+        }
+        public function delete_gallery($id){
+            $save=$this->Tourism_model->delete_gallery($id);
+            if($save){
+                $this->session->set_flashdata('success','Image details successfully deleted!');
+            }else{
+                $this->session->set_flashdata('failed','Unbale to delete image details!');
+            }
+            redirect(base_url('company_gallery'));
         }
         //======================================Company Module====================================================
 

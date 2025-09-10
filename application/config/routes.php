@@ -62,6 +62,13 @@ $route['admin_main'] = 'pages/admin_main';
 $route['admin_authenticate'] = 'pages/admin_authenticate';
 $route['admin'] = 'pages/admin';
 //===========================Company Route=======================
+$route['delete_gallery/(:any)'] = 'pages/delete_gallery/$1';
+$route['save_gallery'] = 'pages/save_gallery';
+$route['company_gallery'] = 'pages/company_gallery';
+$route['logout'] = 'pages/logout';
+$route['main'] = 'pages/main';
+$route['authenticate'] = 'pages/authenticate';
+$route['login'] = 'pages/login';
 $route['register'] = 'pages/register';
 $route['registration'] = 'pages/registration';
 //===========================User Route==========================
