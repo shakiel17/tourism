@@ -27,12 +27,15 @@
                 </div>
                 <form action="<?=base_url('save_gallery');?>" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="id" id="home_image_id">
-                <div class="modal-body">
-                    
+                <div class="modal-body">                    
                     <div class="form-group mt-2">
                         <label>Image</label>
                         <input type="file" name="file" class="form-control">
-                    </div>                    
+                    </div>
+                    <div class="form-group mt-2">                        
+                        <input type="checkbox" name="is_featured" value="1">
+                        <label>Is Featured?</label>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <a href="#" class="btn btn-secondary" data-bs-dismiss="modal">Close</a>

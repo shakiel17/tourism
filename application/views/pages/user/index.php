@@ -93,7 +93,8 @@
                                         </div>
                                     </div>
                                     <div class="gallery-plus-icon">
-                                        <a href="data:image/jpg;charset=utf8;base64,<?=base64_encode($res['images']);?>" data-lightbox="gallery-1" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                                        <!-- <a href="data:image/jpg;charset=utf8;base64,<?=base64_encode($res['images']);?>" data-lightbox="gallery-1" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a> -->
+                                         <a href="<?=base_url('company/'.$res['company_id']);?>" class="my-auto text-white"><i class="fas fa-search fa-2x text-white"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -120,7 +121,8 @@
                                         </div>
                                     </div>
                                     <div class="gallery-plus-icon">
-                                        <a href="data:image/jpg;charset=utf8;base64,<?=base64_encode($rw['images']);?>" data-lightbox="gallery-2" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                                        <!-- <a href="data:image/jpg;charset=utf8;base64,<?=base64_encode($rw['images']);?>" data-lightbox="gallery-2" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a> -->
+                                         <a href="<?=base_url('company/'.$res['company_id']);?>" class="my-auto text-white"><i class="fas fa-search fa-2x text-white"></i></a>
                                     </div>
                                 </div>
                             </div>

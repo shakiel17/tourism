@@ -11,7 +11,7 @@
             }
             $data['detail'] = $this->Tourism_model->getSettings();
             $data['home'] = 'active';
-            $data['about'] = '';
+            $data['about'] = '';            
             $data['carousel'] = $this->Tourism_model->getAllHomeImages();
             $data['gallery'] = $this->Tourism_model->getAllStablishment('Approved');
             $data['company_gallery'] = $this->Tourism_model->getAllStablishmentGallery();
@@ -27,8 +27,23 @@
             }
             $data['detail'] = $this->Tourism_model->getSettings();
             $data['home'] = '';
-            $data['about'] = 'active';
+            $data['about'] = 'active';            
             $data['carousel'] = $this->Tourism_model->getAllHomeImages();
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar',$data);            
+            $this->load->view('pages/user/'.$page,$data);            
+            $this->load->view('templates/footer',$data);        
+        }
+        public function company($id){
+            $page = "company";
+            if(!file_exists(APPPATH.'views/pages/user/'.$page.".php")){
+                show_404();
+            }
+            $data['detail'] = $this->Tourism_model->getSettings();
+            $data['home'] = '';
+            $data['about'] = '';            
+            $data['background'] = $this->Tourism_model->getStablishmentGalleryFeatured($id);
+            $data['gallery'] = $this->Tourism_model->getStablishmentGallery($id);
             $this->load->view('templates/header');
             $this->load->view('templates/navbar',$data);            
             $this->load->view('pages/user/'.$page,$data);            
