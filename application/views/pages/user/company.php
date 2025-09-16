@@ -81,26 +81,7 @@
                             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                 <!-- <div class="gallery-item h-100"> -->
                                     
-                                        <div id="app">
-                                            <header>                                       
-                                            <div class="controls">
-                                                <input id="search-box" type="text" placeholder="Search places" />
-                                                <select id="travel-mode">
-                                                <option value="driving">🚗 Driving</option>
-                                                <option value="walking">🚶 Walking</option>
-                                                </select>
-                                                <button id="dir-btn">Get Directions</button>
-                                                <button id="loc-btn">My Location</button>
-                                            </div>
-                                            </header>
-
-                                            <main>
-                                            <div style="position:relative; flex:1;">
-                                                <div id="map"></div>
-                                                <div id="search-results" class="search-results" style="display:none;"></div>
-                                            </div>                                        
-                                            </main>                                        
-                                        </div>
+                                        <?=$rw['location'];?>
                                     
                                 <!-- </div> -->
                             </div>                          

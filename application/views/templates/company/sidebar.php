@@ -17,6 +17,7 @@
                 <div class="navbar-nav w-100">
                     <a href="<?=base_url('main');?>" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <a href="<?=base_url('company_gallery');?>" class="nav-item nav-link"><i class="fa fa-building me-2"></i>My Gallery</a>
+                    <a href="<?=base_url('company_profile');?>" class="nav-item nav-link"><i class="fa fa-user me-2"></i>My Profile</a>
                     <!-- <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-cogs me-2"></i>Settings</a>
                         <div class="dropdown-menu bg-transparent border-0">

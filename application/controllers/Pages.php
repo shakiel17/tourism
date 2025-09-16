@@ -156,6 +156,35 @@
             }
             redirect(base_url('company_gallery'));
         }
+        public function company_profile(){
+            $page = "profile";
+            if(!file_exists(APPPATH.'views/pages/company/'.$page.".php")){
+                show_404();
+            }             
+            if($this->session->user_login){
+
+            }else{
+                $this->session->set_flashdata('error','You are not logged in!');
+                redirect(base_url('login'));
+            }            
+            $data['title'] = "My Profile";            
+            $data['item'] = $this->Tourism_model->getStablishmentProfile($this->session->company_id);
+            $this->load->view('templates/company/header');            
+            $this->load->view('templates/company/sidebar');
+            $this->load->view('templates/company/navbar');
+            $this->load->view('pages/company/'.$page,$data);
+            $this->load->view('templates/company/modal');
+            $this->load->view('templates/company/footer');
+        }
+        public function update_company_profile(){
+            $save=$this->Tourism_model->update_company_profile();
+            if($save){
+                $this->session->set_flashdata('success','Profile successfully updated!');
+            }else{
+                $this->session->set_flashdata('failed','Unbale to update profile!');
+            }
+            redirect(base_url('company_profile'));
+        }
         //======================================Company Module====================================================
 
         //======================================Admin Module====================================================

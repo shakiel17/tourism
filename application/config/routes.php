@@ -62,6 +62,8 @@ $route['admin_main'] = 'pages/admin_main';
 $route['admin_authenticate'] = 'pages/admin_authenticate';
 $route['admin'] = 'pages/admin';
 //===========================Company Route=======================
+$route['update_company_profile'] = 'pages/update_company_profile';
+$route['company_profile'] = 'pages/company_profile';
 $route['delete_gallery/(:any)'] = 'pages/delete_gallery/$1';
 $route['save_gallery'] = 'pages/save_gallery';
 $route['company_gallery'] = 'pages/company_gallery';

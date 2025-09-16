@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Leaflet + OpenRouteService Directions with Search</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+  <style>
+    html, body { margin:0; padding:0; height:100%; }
+    body { display:flex; flex-direction:column; font-family: Arial, sans-serif; }
+    #topbar { padding:10px; background:#fff; box-shadow:0 2px 6px rgba(0,0,0,0.15); z-index:10; }
+    .controls { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+    input, select { padding:6px; font-size:14px; }
+    #map { flex:1; cursor: crosshair; }
+    #panel { max-height:200px; overflow:auto; background:#fff; padding:10px; border-top:1px solid #ddd; }
+    .step { margin-bottom:8px; border-bottom:1px solid #eee; padding-bottom:4px; }
+  </style>
+</head>
+<body>
+  <div id="topbar">
+    <div class="controls">
+      <input id="origin" placeholder="Enter origin or click map" />
+      <input id="destination" placeholder="Enter destination or click map" />
+      <select id="mode">
+        <option value="driving-car">Driving</option>
+        <option value="foot-walking">Walking</option>
+      </select>
+      <button onclick="getRoute()" class="btn btn-primary btn-sm">Get Directions</button>
+      <span style="font-size:13px;color:#555;">Click map once for origin, twice for destination.</span>
+    </div>
+  </div>
+  <div id="map"></div>
+  <div id="panel"><strong>Directions:</strong><div id="directions">No route yet.</div></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+  <script>
+    const apiKey = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6IjA2ODFlOTRlODViNzQ4NDk4MzU0NzQyMGRmOTNjMTg5IiwiaCI6Im11cm11cjY0In0="; // Get free key at openrouteservice.org
+
+    // Default location (e.g. Kidapawan City)
+    const defaultLocation = [7.017569571464816, 125.22363307845009];
+
+    // Initialize map with default location
+    const map = L.map('map').setView(defaultLocation, 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/">OSM</a> contributors'
+    }).addTo(map);
+
+    // Place a marker at default location
+    L.marker(defaultLocation).addTo(map).bindPopup('Default Location').openPopup();
+
+    // Add search control (Leaflet Control Geocoder)
+    L.Control.geocoder({
+      defaultMarkGeocode: false
+    }).on('markgeocode', function(e) {
+      const bbox = e.geocode.bbox;
+      const poly = L.polygon([
+        bbox.getSouthEast(),
+        bbox.getNorthEast(),
+        bbox.getNorthWest(),
+        bbox.getSouthWest()
+      ]);
+      map.fitBounds(poly.getBounds());
+    }).addTo(map);
+
+    let routeLayer;
+    let originCoords = null;
+    let destCoords = null;
+    let clickCount = 0;
+    let originMarker, destMarker;
+
+    map.on('click', e => {
+      clickCount++;
+      if (clickCount === 1) {
+        originCoords = [e.latlng.lat, e.latlng.lng];
+        if (originMarker) map.removeLayer(originMarker);
+        originMarker = L.marker(originCoords).addTo(map).bindPopup('Origin').openPopup();
+        document.getElementById('origin').value = `${originCoords[0].toFixed(5)}, ${originCoords[1].toFixed(5)}`;
+      } else if (clickCount === 2) {
+        destCoords = [e.latlng.lat, e.latlng.lng];
+        if (destMarker) map.removeLayer(destMarker);
+        destMarker = L.marker(destCoords).addTo(map).bindPopup('Destination').openPopup();
+        document.getElementById('destination').value = `${destCoords[0].toFixed(5)}, ${destCoords[1].toFixed(5)}`;
+        clickCount = 0; // reset for next route
+      }
+    });
+
+    async function geocode(query) {
+      if (/^-?\d+(\.\d+)?,\s*-?\d+(\.\d+)?$/.test(query)) {
+        const parts = query.split(',').map(p => parseFloat(p.trim()));
+        return [parts[0], parts[1]];
+      }
+      const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      return data.length ? [parseFloat(data[0].lat), parseFloat(data[0].lon)] : null;
+    }
+
+    async function getRoute() {
+      const originInput = document.getElementById('origin').value;
+      const destinationInput = document.getElementById('destination').value;
+      const mode = document.getElementById('mode').value;
+
+      if (!originInput && !originCoords) {
+        alert('Please provide origin (type or click on map)');
+        return;
+      }
+      if (!destinationInput && !destCoords) {
+        alert('Please provide destination (type or click on map)');
+        return;
+      }
+
+      const oCoords = originCoords || await geocode(originInput);
+      const dCoords = destCoords || await geocode(destinationInput);
+      if (!oCoords || !dCoords) {
+        alert('Could not find one of the locations.');
+        return;
+      }
+
+      const url = `https://api.openrouteservice.org/v2/directions/${mode}?api_key=${apiKey}`;
+      const body = {
+        coordinates: [ [oCoords[1], oCoords[0]], [dCoords[1], dCoords[0]] ]
+      };
+
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      const data = await res.json();
+
+      if (data && data.features) {
+        const coords = data.features[0].geometry.coordinates.map(c => [c[1], c[0]]);
+        if (routeLayer) map.removeLayer(routeLayer);
+        routeLayer = L.polyline(coords, {color: 'blue'}).addTo(map);
+        map.fitBounds(routeLayer.getBounds());
+
+        const steps = data.features[0].properties.segments[0].steps;
+        document.getElementById('directions').innerHTML = steps.map(s => `<div class=\"step\">${s.instruction} <span class=\"small\">(${s.distance.toFixed(0)} m)</span></div>`).join('');
+      } else {
+        alert('No route found.');
+      }
+    }
+  </script>
+</body>
+</html>

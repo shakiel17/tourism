@@ -180,5 +180,29 @@
                 return false;
             }
         }
+        public function getStablishmentProfile($id){
+            $result=$this->db->query("SELECT * FROM company WHERE company_id='$id'");
+            return $result->row_array();        
+        }
+
+        public function update_company_profile(){
+            $company_id=$this->session->company_id;
+            $companyname=$this->input->post('companyname');
+            $description=$this->input->post('description');
+            $address=$this->input->post('address');
+            $contactno=$this->input->post('contactno');
+            $email=$this->input->post('email');
+            $facebook=$this->input->post('facebook');
+            $location=$this->input->post('location');
+            $loc=$this->input->post('loc');     
+            
+            $result=$this->db->query("UPDATE company SET companyname='$companyname',`description`='$description',`address`='$address',contactno='$contactno',email='$email',facebook='$facebook',`location`='$location' WHERE company_id='$company_id'");
+            if($result){                
+                return true;
+            }else{
+                return false;
+            }            
+        }
+
     }
 ?>
