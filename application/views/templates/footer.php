@@ -100,7 +100,48 @@
         <script src="<?=base_url('design/assets/user/lib/lightbox/js/lightbox.min.js');?>"></script>
         
         <!-- Template Javascript -->
-        <script src="<?=base_url('design/assets/user/js/main.js');?>"></script>             
+        <script src="<?=base_url('design/assets/user/js/main.js');?>"></script>   
+        <script>
+            const form = document.getElementById('ratingForm');
+            const radios = Array.from(document.querySelectorAll('input[name="rating"]'));
+            const selectedValue = document.getElementById('selectedValue');
+            const result = document.getElementById('result');
+            const clearBtn = document.getElementById('clearBtn');
+
+            function getCheckedValue(){
+            const r = radios.find(i => i.checked);
+            return r ? r.value : null;
+            }
+
+            function updateDisplay(){
+            const v = getCheckedValue();
+            selectedValue.textContent = v ? v + '/5' : '—';
+            }
+
+            radios.forEach(r => r.addEventListener('change', updateDisplay));
+
+            form.addEventListener('submit', e => {
+            e.preventDefault();
+            const rating = getCheckedValue();
+            const comment = document.getElementById('comment').value.trim();
+            if(!rating){
+                result.style.display = 'block';
+                result.textContent = '⚠ Please select a rating before submitting.';
+                return;
+            }
+            result.style.display = 'block';
+            result.textContent = `✅ Thanks! You rated this ${rating}/5.` + (comment ? ` Comment: "${comment}"` : '');
+            });
+
+            clearBtn.addEventListener('click', () => {
+            radios.forEach(r => r.checked = false);
+            document.getElementById('comment').value = '';
+            updateDisplay();
+            result.style.display = 'none';
+            });
+
+            updateDisplay();
+        </script>        
     </body>
 
 </html>

@@ -74,6 +74,7 @@ $route['login'] = 'pages/login';
 $route['register'] = 'pages/register';
 $route['registration'] = 'pages/registration';
 //===========================User Route==========================
+$route['save_feedback'] = 'pages/save_feedback';
 $route['company/(:any)'] = 'pages/company/$1';
 $route['about'] = 'pages/about';
 $route['default_controller'] = 'pages/index';

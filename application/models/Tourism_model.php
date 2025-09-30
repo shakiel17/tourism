@@ -203,6 +203,23 @@
                 return false;
             }            
         }
-
+        public function getFeedBack($company_id){
+            $result=$this->db->query("SELECT * FROM feedback WHERE company_id='$company_id' ORDER BY fb_datearray ASC, fb_timearray ASC");
+            return $result->result_array();
+        }
+        public function save_feedback(){
+            $company_id=$this->input->post('company_id');
+            $fb_description=$this->input->post('fb_description');
+            $fb_name=$this->input->post('fb_name');
+            $fb_rate=$this->input->post('fb_rate');
+            $date=date('Y-m-d');
+            $time=date('H:i:s');
+            $result=$this->db->query("INSERT INTO feedback(company_id,fb_description,fb_name,fb_rate,fb_datearray,fb_timearray) VALUES('$company_id','$fb_description','$fb_name','$fb_rate','$date','$time')");
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 ?>

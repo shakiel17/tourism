@@ -44,10 +44,24 @@
             $data['about'] = '';            
             $data['background'] = $this->Tourism_model->getStablishmentGalleryFeatured($id);
             $data['gallery'] = $this->Tourism_model->getStablishmentGallery($id);
+            $data['feedback'] = $this->Tourism_model->getFeedBack($id); 
+            $data['customer_id'] = $id;
             $this->load->view('templates/header');
             $this->load->view('templates/navbar',$data);            
             $this->load->view('pages/user/'.$page,$data);            
             $this->load->view('templates/footer',$data);        
+        }
+        public function save_feedback(){
+            $company_id=$this->input->post('company_id');
+            $register=$this->Tourism_model->save_feedback();
+            echo "<script>";
+            if($register){
+                echo "alert('Feedback successfully saved!');";
+            }else{
+                echo "alert('Unable to save feedback!');";
+            }
+                echo "window.location='".base_url('company/'.$company_id)."';";
+            echo "</script>";
         }
         //======================================User Module=======================================================
         //======================================Company Module====================================================

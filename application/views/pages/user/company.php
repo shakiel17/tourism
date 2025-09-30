@@ -91,6 +91,104 @@
             </div>
         </div>        
         <!-- About End -->
+         <div class="container-fluid testimonial py-5">
+            <div class="container py-5">
+                <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+                    <h5 class="section-title px-3">Testimonial</h5>
+                    <h1 class="mb-0">Our Clients Say!!!</h1>
+                </div>
+                <div class="testimonial-carousel owl-carousel">
+                    <?php
+                    foreach($feedback as $feed){
+                    ?>
+                    <div class="testimonial-item text-center rounded pb-4">
+                        <div class="testimonial-comment bg-light rounded p-4">
+                            <p class="text-center mb-5">
+                                <?=$feed['fb_description'];?>
+                            </p>
+                        </div>
+                        <div class="testimonial-img p-1">
+                            <img src="<?=base_url('design/assets/user/img/testimonial-1.jpg');?>" class="img-fluid rounded-circle" alt="Image">
+                        </div>
+                        <div style="margin-top: -35px;">
+                            <h5 class="mb-0"><?=$feed['fb_name'];?></h5>
+                            <p class="mb-0"><?=date('m/d/Y',strtotime($feed['fb_datearray']));?> | <?=date('h:i A',strtotime($feed['fb_timearray']));?></p>
+                            <div class="d-flex justify-content-center">
+                                <?php
+                                $w=$feed['fb_rate'];
+                                $x=0;
+                                while($x < $w){
+                                ?>
+                                <i class="fas fa-star text-primary"></i>
+                                <?php
+                                $x++;
+                                }
+                                ?>                                
+                            </div>
+                        </div>
+                    </div> 
+                    <?php
+                    }
+                    ?>                     
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid contact py-5">
+            <div class="container py-5">
+                <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+                    <h5 class="section-title px-3">Feedback</h5>
+                    <h1 class="mb-0">Tell me about your experience!!</h1>
+                </div>
+                <div class="row g-5 align-items-center">                   
+                    <div class="col-lg-12">                        
+                        <form action="<?=base_url('save_feedback');?>" method="POST">
+                            <input type="hidden" name="company_id" value="<?=$customer_id;?>">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="email">Rate Me</label>                                 
+                                        <div class="rating" role="radiogroup" aria-label="Star rating">
+                                            <div class="stars">
+                                            <input type="radio" id="star5" name="fb_rate" value="5">
+                                            <label for="star5"><svg viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431L23.6 9.75l-5.8 5.656L19.335 24 12 19.897 4.665 24l1.534-8.594L.4 9.75l7.932-1.732z"/></svg></label>
+
+                                            <input type="radio" id="star4" name="fb_rate" value="4">
+                                            <label for="star4"><svg viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431L23.6 9.75l-5.8 5.656L19.335 24 12 19.897 4.665 24l1.534-8.594L.4 9.75l7.932-1.732z"/></svg></label>
+
+                                            <input type="radio" id="star3" name="fb_rate" value="3">
+                                            <label for="star3"><svg viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431L23.6 9.75l-5.8 5.656L19.335 24 12 19.897 4.665 24l1.534-8.594L.4 9.75l7.932-1.732z"/></svg></label>
+
+                                            <input type="radio" id="star2" name="fb_rate" value="2">
+                                            <label for="star2"><svg viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431L23.6 9.75l-5.8 5.656L19.335 24 12 19.897 4.665 24l1.534-8.594L.4 9.75l7.932-1.732z"/></svg></label>
+
+                                            <input type="radio" id="star1" name="fb_rate" value="1">
+                                            <label for="star1"><svg viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431L23.6 9.75l-5.8 5.656L19.335 24 12 19.897 4.665 24l1.534-8.594L.4 9.75l7.932-1.732z"/></svg></label>
+                                            </div>
+                                            <!-- <div class="value" id="selectedValue">—</div> -->
+                                        </div>                                    
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control border-2" name="fb_name" id="name" placeholder="Your Name">
+                                        <label for="name">Your Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control border-1" name="fb_description" placeholder="Leave a message here" id="message" style="height: 160px"></textarea>
+                                        <label for="message">Feedback</label>
+                                    </div>
+                                </div>                                                                                                                               
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100 py-3" type="submit">Send Feedback</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+
           <div class="container-fluid subscribe py-5"<?=$back;?>>
             <div class="container text-center py-5">
                 <div class="mx-auto text-center" style="max-width: 900px;">
