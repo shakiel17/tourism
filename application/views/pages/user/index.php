@@ -19,9 +19,9 @@
                                     <h1 class="display-2 text-capitalize text-white mb-4">Let's Explore Kidapawan City Together!</h1>
                                     <p class="mb-5 fs-5"><?=$item['description'];?> 
                                     </p>
-                                    <div class="d-flex align-items-center justify-content-center">
+                                    <!-- <div class="d-flex align-items-center justify-content-center">
                                         <a class="btn-hover-bg btn btn-primary rounded-pill text-white py-3 px-5" href="#">Discover Now</a>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -43,13 +43,13 @@
             </div>
             <!-- Carousel End -->
         </div>
-         <div class="container-fluid search-bar position-relative" style="top: -50%; transform: translateY(-50%);">
+         <!-- <div class="container-fluid search-bar position-relative" style="top: -50%; transform: translateY(-50%);">
             <div class="container">
                 <div class="position-relative rounded-pill w-100 mx-auto p-5" style="background: rgba(19, 53, 123, 0.8);">
                     <input class="form-control border-0 rounded-pill w-100 py-3 ps-4 pe-5" type="text" placeholder="Eg: Lake Agco">
                     <button type="button" class="btn btn-primary rounded-pill py-2 px-4 position-absolute me-2" style="top: 50%; right: 46px; transform: translateY(-50%);">Search</button>
                 </div>
-            </div>
+            </div> -->
         </div>
         <!-- Gallery Start -->
         <div class="container-fluid gallery py-5 my-5">
