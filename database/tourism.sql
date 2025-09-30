@@ -102,6 +102,34 @@ INSERT INTO `company_gallery` VALUES (2,'20250908094056',_binary 'ÿ\Øÿ\à\0JFIF\
 UNLOCK TABLES;
 
 --
+-- Table structure for table `feedback`
+--
+
+DROP TABLE IF EXISTS `feedback`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `feedback` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `company_id` varchar(45) DEFAULT NULL,
+  `fb_description` text,
+  `fb_name` varchar(100) DEFAULT NULL,
+  `fb_rate` varchar(45) DEFAULT NULL,
+  `fb_datearray` date DEFAULT NULL,
+  `fb_timearray` time DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `feedback`
+--
+
+LOCK TABLES `feedback` WRITE;
+/*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
+/*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `gallery`
 --
 
@@ -193,4 +221,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-09-22 12:36:52
+-- Dump completed on 2025-09-30  9:42:40
