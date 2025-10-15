@@ -140,7 +140,7 @@
             return $result->result_array();
         }        
         public function getStablishmentGallery($id){
-            $result=$this->db->query("SELECT cg.images,c.*,cg.id as img_id FROM company_gallery cg INNER JOIN company c ON c.company_id=cg.company_id WHERE c.status='Approved' AND c.company_id='$id'");
+            $result=$this->db->query("SELECT cg.images,c.*,cg.id as img_id,cg.description as info FROM company_gallery cg INNER JOIN company c ON c.company_id=cg.company_id WHERE c.status='Approved' AND c.company_id='$id'");
             return $result->result_array();
         } 
         public function getStablishmentGalleryFeatured($id){
@@ -154,6 +154,7 @@
         public function save_gallery(){
             $id=$this->session->company_id;   
             $is_featured=$this->input->post('is_featured');
+            $description=$this->input->post('description');
             if($_FILES["file"]["name"] != ""){
                 $fileName=basename($_FILES["file"]["name"]);
                 $fileType=pathinfo($fileName, PATHINFO_EXTENSION);
@@ -161,7 +162,7 @@
                 if(in_array($fileType,$allowTypes)){
                     $image = $_FILES["file"]["tmp_name"];
                     $imgContent=addslashes(file_get_contents($image));                    
-                    $result=$this->db->query("INSERT INTO company_gallery(company_id,`images`,is_main) VALUES('$id','$imgContent','$is_featured')");                    
+                    $result=$this->db->query("INSERT INTO company_gallery(company_id,`images`,`description`,is_main) VALUES('$id','$imgContent','$description','$is_featured')");                    
                 }else{
                     return false;
                 }

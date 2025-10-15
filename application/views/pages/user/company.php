@@ -63,11 +63,11 @@
                                     <img src="data:image/jpg;charset=utf8;base64,<?=base64_encode($rw['images']);?>" class="img-fluid w-100 h-100 rounded" alt="Image">
                                     <div class="gallery-content">
                                         <div class="gallery-info">
-                                            <h5 class="text-white text-uppercase mb-2"><?=$rw['companyname'];?></h5>                                            
+                                            <p class="text-white mb-2" align="justify" style="font-size:12px;"><?=$rw['info'];?></p>
                                         </div>
                                     </div>
                                     <div class="gallery-plus-icon">
-                                        <a href="data:image/jpg;charset=utf8;base64,<?=base64_encode($rw['images']);?>" data-lightbox="gallery-2" class="my-auto"><i class="fas fa-plus fa-2x text-white"></i></a>
+                                        <a href="data:image/jpg;charset=utf8;base64,<?=base64_encode($rw['images']);?>" data-lightbox="gallery-2" class="my-auto"><i class="fas fa-eye fa-2x text-white"></i></a>
                                     </div>
                                 </div>
                             </div>

@@ -32,6 +32,10 @@
                         <label>Image</label>
                         <input type="file" name="file" class="form-control">
                     </div>
+                    <div class="form-group mt-2">
+                        <label>Description</label>
+                        <textarea name="description" class="form-control" rows="3"></textarea>
+                    </div>
                     <div class="form-group mt-2">                        
                         <input type="checkbox" name="is_featured" value="1">
                         <label>Is Featured?</label>

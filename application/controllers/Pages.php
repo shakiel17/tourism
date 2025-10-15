@@ -231,25 +231,25 @@
                 redirect(base_url('admin'));
             }
         }
-        public function admin_main(){
-            $page = "main";
-            if(!file_exists(APPPATH.'views/pages/admin/'.$page.".php")){
-                show_404();
-            }             
-            if($this->session->admin_login){
+        // public function admin_main(){
+        //     $page = "stablishment";
+        //     if(!file_exists(APPPATH.'views/pages/admin/'.$page.".php")){
+        //         show_404();
+        //     }             
+        //     if($this->session->admin_login){
 
-            }else{
-                $this->session->set_flashdata('error','You are not logged in!');
-                redirect(base_url('admin'));
-            }            
-            $data['title'] = "Dashboard";            
-            $this->load->view('templates/admin/header');            
-            $this->load->view('templates/admin/sidebar');
-            $this->load->view('templates/admin/navbar');
-            $this->load->view('pages/admin/'.$page,$data);
-            $this->load->view('templates/admin/modal');
-            $this->load->view('templates/admin/footer');
-        }
+        //     }else{
+        //         $this->session->set_flashdata('error','You are not logged in!');
+        //         redirect(base_url('admin'));
+        //     }            
+        //     $data['title'] = "Dashboard";            
+        //     $this->load->view('templates/admin/header');            
+        //     $this->load->view('templates/admin/sidebar');
+        //     $this->load->view('templates/admin/navbar');
+        //     $this->load->view('pages/admin/'.$page,$data);
+        //     $this->load->view('templates/admin/modal');
+        //     $this->load->view('templates/admin/footer');
+        // }
         public function adminlogout(){
             $data=array('username','fullname','admin_login');
             $this->session->unset_userdata($data);
@@ -313,7 +313,7 @@
             }
             redirect(base_url('manage_home_image'));
         }
-        public function stablishment(){
+        public function admin_main(){
             $page = "stablishment";
             if(!file_exists(APPPATH.'views/pages/admin/'.$page.".php")){
                 show_404();
