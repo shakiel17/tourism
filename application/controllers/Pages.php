@@ -143,14 +143,17 @@
                 $this->session->set_flashdata('error','You are not logged in!');
                 redirect(base_url('login'));
             }            
-            $data['title'] = "My Gallery";            
             $data['items'] = $this->Tourism_model->getStablishmentGallery($this->session->company_id);
-            $this->load->view('templates/company/header');            
-            $this->load->view('templates/company/sidebar');
-            $this->load->view('templates/company/navbar');
-            $this->load->view('pages/company/'.$page,$data);
-            $this->load->view('templates/company/modal');
-            $this->load->view('templates/company/footer');
+            
+            $data['title'] = "My Gallery";
+
+                $this->load->view('templates/company/header');            
+                $this->load->view('templates/company/sidebar');
+                $this->load->view('templates/company/navbar');
+                $this->load->view('pages/company/'.$page,$data);
+                $this->load->view('templates/company/modal');
+                $this->load->view('templates/company/footer');
+            
         }
         public function save_gallery(){
             $save=$this->Tourism_model->save_gallery();
@@ -324,7 +327,7 @@
                 $this->session->set_flashdata('error','You are not logged in!');
                 redirect(base_url('admin'));
             }            
-            $data['title'] = "Stablishment List"; 
+            $data['title'] = "Establishment List"; 
             $data['items'] = $this->Tourism_model->getAllStablishment('Approved');
             $this->load->view('templates/admin/header');            
             $this->load->view('templates/admin/sidebar');
@@ -361,6 +364,50 @@
                 $this->session->set_flashdata('failed','Unbale to update application status!');
             }
             redirect(base_url('manage_company_registration'));
+        }
+        public function view_gallery($company_id){
+            $page = "gallery";
+            if(!file_exists(APPPATH.'views/pages/admin/'.$page.".php")){
+                show_404();
+            }             
+            if($this->session->admin_login){
+
+            }else{
+                $this->session->set_flashdata('error','You are not logged in!');
+                redirect(base_url('admin'));
+            }                                   
+            $data['items'] = $this->Tourism_model->getStablishmentGallery($company_id);
+            $cname="";
+            foreach($data['items'] as $details){
+                $cname=$details['companyname'];
+            }
+            $data['title'] = $cname;
+                $this->load->view('templates/admin/header');            
+                $this->load->view('templates/admin/sidebar');
+                $this->load->view('templates/admin/navbar');
+                $this->load->view('pages/admin/'.$page,$data);
+                $this->load->view('templates/admin/modal');
+                $this->load->view('templates/admin/footer');
+        }
+        public function view_location($company_id){
+            $page = "location";
+            if(!file_exists(APPPATH.'views/pages/admin/'.$page.".php")){
+                show_404();
+            }             
+            if($this->session->admin_login){
+
+            }else{
+                $this->session->set_flashdata('error','You are not logged in!');
+                redirect(base_url('admin'));
+            }                                   
+            $data['item'] = $this->Tourism_model->getSingleEstablishment($company_id);                        
+            $data['title'] = $data['item']['companyname'];
+                $this->load->view('templates/admin/header');            
+                $this->load->view('templates/admin/sidebar');
+                $this->load->view('templates/admin/navbar');
+                $this->load->view('pages/admin/'.$page,$data);
+                $this->load->view('templates/admin/modal');
+                $this->load->view('templates/admin/footer');
         }
         //======================================Admin Module====================================================
     }

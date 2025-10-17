@@ -45,7 +45,7 @@
                                         echo "<td>$item[contactno]</td>";
                                         echo "<td>$item[email]</td>";
                                         echo "<td><a href='$item[facebook]' class='btn btn-warning btn-sm' target='_blank'>View Profile</a></td>";
-                                        echo "<td><a href='$item[location]' class='btn btn-primary btn-sm' target='_blank'>View</a></td>";
+                                        echo "<td><a href='".base_url('view_location/'.$item['company_id'])."' class='btn btn-primary btn-sm' target='_blank'>View</a></td>";
                                         ?>
                                         <td width="5%">
                                             <a href="<?=base_url('view_gallery/'.$item['company_id']);?>" class="btn btn-success btn-sm">Gallery</a>

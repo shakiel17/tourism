@@ -222,5 +222,13 @@
                 return false;
             }
         }
+        public function getSingleEstablishment($company_id){
+            $result=$this->db->query("SELECT * FROM company WHERE company_id='$company_id'");
+            if($result->num_rows()>0){
+                return $result->row_array();
+            }else{
+                return false;
+            }
+        }
     }
 ?>
