@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 //===========================Admin Route=========================
-$route['view_location/(:any)'] = 'pages/view_location/$1';
+$route['view_location/(:any)/(:any)'] = 'pages/view_location/$1/$2';
 $route['view_gallery/(:any)'] = 'pages/view_gallery/$1';
 $route['update_application/(:any)/(:any)'] = 'pages/update_application/$1/$2';
 $route['manage_company_registration'] = 'pages/manage_company_registration';
@@ -76,6 +76,7 @@ $route['login'] = 'pages/login';
 $route['register'] = 'pages/register';
 $route['registration'] = 'pages/registration';
 //===========================User Route==========================
+$route['search_establishment'] = 'pages/search_establishment';
 $route['save_feedback'] = 'pages/save_feedback';
 $route['company/(:any)'] = 'pages/company/$1';
 $route['about'] = 'pages/about';

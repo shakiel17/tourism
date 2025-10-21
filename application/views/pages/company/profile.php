@@ -54,7 +54,7 @@
                                         <label for="floatingTextarea">Email</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <textarea class="form-control" name="email" placeholder="Facebook Page"
+                                        <textarea class="form-control" name="facebook" placeholder="Facebook Page"
                                             id="floatingTextarea" style="height: 60px;"><?=$item['facebook'];?></textarea>
                                         <label for="floatingTextarea">Facebook</label>
                                     </div>

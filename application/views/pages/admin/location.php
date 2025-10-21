@@ -2,7 +2,7 @@
             <div class="container-fluid pt-4 px-4">                
                 <table width="100%" border="0">
                     <tr>
-                        <td><h4><a href="<?=base_url('admin_main');?>"><< Back</a> | <?=$title;?></h4></td>                        
+                        <td><h4><a href="<?=base_url($loc);?>"><< Back</a> | <?=$title;?></h4></td>                        
                     </tr>          
                 </table>                    
             </div>

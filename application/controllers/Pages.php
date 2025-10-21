@@ -20,6 +20,22 @@
             $this->load->view('pages/user/'.$page,$data);            
             $this->load->view('templates/footer',$data);        
         }
+        public function search_establishment(){
+            $page = "search_company";
+            if(!file_exists(APPPATH.'views/pages/user/'.$page.".php")){
+                show_404();
+            }
+            $data['detail'] = $this->Tourism_model->getSettings();
+            $data['home'] = 'active';
+            $data['about'] = '';            
+            $description=$this->input->post('description');
+            $data['carousel'] = $this->Tourism_model->getAllHomeImages();
+            $data['gallery'] = $this->Tourism_model->fetchEstablishment($description);            
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar',$data);            
+            $this->load->view('pages/user/'.$page,$data);            
+            $this->load->view('templates/footer',$data);        
+        }
         public function about(){
             $page = "about";
             if(!file_exists(APPPATH.'views/pages/user/'.$page.".php")){
@@ -234,25 +250,26 @@
                 redirect(base_url('admin'));
             }
         }
-        // public function admin_main(){
-        //     $page = "stablishment";
-        //     if(!file_exists(APPPATH.'views/pages/admin/'.$page.".php")){
-        //         show_404();
-        //     }             
-        //     if($this->session->admin_login){
+        public function stablishment(){
+            $page = "stablishment";
+            if(!file_exists(APPPATH.'views/pages/admin/'.$page.".php")){
+                show_404();
+            }             
+            if($this->session->admin_login){
 
-        //     }else{
-        //         $this->session->set_flashdata('error','You are not logged in!');
-        //         redirect(base_url('admin'));
-        //     }            
-        //     $data['title'] = "Dashboard";            
-        //     $this->load->view('templates/admin/header');            
-        //     $this->load->view('templates/admin/sidebar');
-        //     $this->load->view('templates/admin/navbar');
-        //     $this->load->view('pages/admin/'.$page,$data);
-        //     $this->load->view('templates/admin/modal');
-        //     $this->load->view('templates/admin/footer');
-        // }
+            }else{
+                $this->session->set_flashdata('error','You are not logged in!');
+                redirect(base_url('admin'));
+            }            
+            $data['title'] = "Dashboard";            
+            $data['items'] = $this->Tourism_model->getAllStablishment('Approved');
+            $this->load->view('templates/admin/header');            
+            $this->load->view('templates/admin/sidebar');
+            $this->load->view('templates/admin/navbar');
+            $this->load->view('pages/admin/'.$page,$data);
+            $this->load->view('templates/admin/modal');
+            $this->load->view('templates/admin/footer');
+        }
         public function adminlogout(){
             $data=array('username','fullname','admin_login');
             $this->session->unset_userdata($data);
@@ -317,7 +334,7 @@
             redirect(base_url('manage_home_image'));
         }
         public function admin_main(){
-            $page = "stablishment";
+            $page = "main";
             if(!file_exists(APPPATH.'views/pages/admin/'.$page.".php")){
                 show_404();
             }             
@@ -328,7 +345,9 @@
                 redirect(base_url('admin'));
             }            
             $data['title'] = "Establishment List"; 
-            $data['items'] = $this->Tourism_model->getAllStablishment('Approved');
+            $data['approved'] = $this->Tourism_model->getAllStablishment('Approved');
+            $data['pending'] = $this->Tourism_model->getAllStablishment('pending');
+            $data['declined'] = $this->Tourism_model->getAllStablishment('Declined');
             $this->load->view('templates/admin/header');            
             $this->load->view('templates/admin/sidebar');
             $this->load->view('templates/admin/navbar');
@@ -389,7 +408,7 @@
                 $this->load->view('templates/admin/modal');
                 $this->load->view('templates/admin/footer');
         }
-        public function view_location($company_id){
+        public function view_location($company_id,$status){
             $page = "location";
             if(!file_exists(APPPATH.'views/pages/admin/'.$page.".php")){
                 show_404();
@@ -402,6 +421,11 @@
             }                                   
             $data['item'] = $this->Tourism_model->getSingleEstablishment($company_id);                        
             $data['title'] = $data['item']['companyname'];
+            if($status=="pending"){
+                $data['loc']="manage_company_registration";
+            }else{
+                $data['loc']="stablishment";
+            }
                 $this->load->view('templates/admin/header');            
                 $this->load->view('templates/admin/sidebar');
                 $this->load->view('templates/admin/navbar');

@@ -230,5 +230,9 @@
                 return false;
             }
         }
+        public function fetchEstablishment($desc){
+            $result=$this->db->query("SELECT cg.images,c.* FROM company_gallery cg INNER JOIN company c ON c.company_id=cg.company_id WHERE c.status='Approved' AND c.companyname LIKE '%$desc%' GROUP BY company_id");
+            return $result->result_array();
+        }
     }
 ?>

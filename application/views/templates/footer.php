@@ -5,16 +5,16 @@
                     <div class="col-md-6 col-lg-6 col-xl-3">
                         <div class="footer-item d-flex flex-column">
                             <h4 class="mb-4 text-white">Get In Touch</h4>
-                            <a href=""><i class="fas fa-home me-2"></i> <?=$detail['address'];?></a>
-                            <a href=""><i class="fas fa-envelope me-2"></i> <?=$detail['email'];?></a>
-                            <a href=""><i class="fas fa-phone me-2"></i> <?=$detail['contactno'];?></a>
-                            <a href="" class="mb-3"><i class="fas fa-print me-2"></i> <?=$detail['contactno'];?></a>
+                            <a><i class="fas fa-home me-2"></i> <?=$detail['address'];?></a>
+                            <a><i class="fas fa-envelope me-2"></i> <?=$detail['email'];?></a>
+                            <a><i class="fas fa-phone me-2"></i> <?=$detail['contactno'];?></a>
+                            <a class="mb-3"><i class="fas fa-print me-2"></i> <?=$detail['contactno'];?></a>
                             <div class="d-flex align-items-center">
                                 <i class="fas fa-share fa-2x text-white me-2"></i>
-                                <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                <a class="btn-square btn btn-primary rounded-circle mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
+                                <a class="btn-square btn btn-primary rounded-circle mx-1"><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn-square btn btn-primary rounded-circle mx-1"><i class="fab fa-twitter"></i></a>
+                                <a class="btn-square btn btn-primary rounded-circle mx-1"><i class="fab fa-instagram"></i></a>
+                                <a class="btn-square btn btn-primary rounded-circle mx-1"><i class="fab fa-linkedin-in"></i></a>
                             </div>
                         </div>
                     </div>

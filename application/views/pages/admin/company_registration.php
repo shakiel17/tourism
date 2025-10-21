@@ -45,7 +45,7 @@
                                         echo "<td>$item[contactno]</td>";
                                         echo "<td>$item[email]</td>";
                                         echo "<td><a href='$item[facebook]' class='btn btn-warning btn-sm' target='_blank'>View Profile</a></td>";
-                                        echo "<td><a href='$item[location]' class='btn btn-primary btn-sm' target='_blank'>View</a></td>";
+                                        echo "<td><a href='".base_url('view_location/'.$item['company_id']."/".$item['status'])."' class='btn btn-primary btn-sm'>View</a></td>";
                                         ?>
                                         <td width="12%">
                                             <a href="<?=base_url('update_application/'.$item['company_id']."/Approved");?>" class="btn btn-success btn-sm" onclick="return confirm('Do you wish to approve this application?');return false;">Approve</a>

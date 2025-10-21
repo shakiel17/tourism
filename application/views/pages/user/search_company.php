@@ -61,28 +61,11 @@
                 <p class="mb-0">Step into the heart of adventure and beauty — where every corner of Kidapawan City tells a story. From the misty heights of Mount Apo to the soothing warmth of Lake Agco, and the vibrant colors of local festivals, every photo is a memory waiting to happen.
                 </p>
             </div>
-            <div class="tab-class text-center">
-                <!-- <ul class="nav nav-pills d-inline-flex justify-content-center mb-5">
-                    <li class="nav-item">
-                        <a class="d-flex mx-3 py-2 border border-primary bg-light rounded-pill active" data-bs-toggle="pill" href="#GalleryTab-1">
-                            <span class="text-dark" style="width: 150px;">All</span>
-                        </a>
-                    </li>
-                    <?php
-                        foreach($gallery as $row){
-                    ?>
-                    <li class="nav-item">
-                        <a class="d-flex py-2 mx-3 border border-primary bg-light rounded-pill" data-bs-toggle="pill" href="#C<?=$row['company_id'];?>">
-                            <span class="text-dark" style="width: 150px;"><?=$row['companyname'];?></span>
-                        </a>
-                    </li>
-                    <?php
-                        }
-                        ?>
-                </ul> -->
+            <div class="tab-class text-center">                
                         <div class="row g-4 justify-content-center">
                             <?php
-                            foreach($company_gallery as $res){
+                            if(count($gallery) > 0){
+                            foreach($gallery as $res){
                             ?>
                             <!-- <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2">
                                 <div class="gallery-item h-100">
@@ -122,6 +105,9 @@
                             </div>
                             <?php
                             }
+                        }else{
+                            echo "No record found!";
+                        }
                             ?>
                         </div>              
             </div>

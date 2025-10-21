@@ -56,22 +56,50 @@
                         <div class="row g-2">
                             <?php
                             // $result=$this->Tourism_model->getStablishmentGallery($item['company_id']);
+                            $x=0;
                             foreach($gallery as $rw){
+                                if($x % 2 == 0){
                             ?>
-                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                                <div class="gallery-item h-100">
-                                    <img src="data:image/jpg;charset=utf8;base64,<?=base64_encode($rw['images']);?>" class="img-fluid w-100 h-100 rounded" alt="Image">
-                                    <div class="gallery-content">
-                                        <div class="gallery-info">
-                                            <p class="text-white mb-2" align="justify" style="font-size:12px;"><?=$rw['info'];?></p>
+                            <div class="container-fluid about py-3">
+                                <div class="container py-2">
+                                    <div class="row g-5 align-items-center">
+                                        <div class="col-lg-5">
+                                            <div class="h-60" style="border: 2px solid; border-color: transparent #13357B transparent #13357B;">
+                                                <?php
+                                                        $background="<img src='data:image/jpg;charset=utf8;base64,".base64_encode($rw['images'])."' class='img-fluid w-60 h-60' alt=''>";
+                                                ?>     
+                                                <?=$background;?>                       
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="gallery-plus-icon">
-                                        <a href="data:image/jpg;charset=utf8;base64,<?=base64_encode($rw['images']);?>" data-lightbox="gallery-2" class="my-auto"><i class="fas fa-eye fa-2x text-white"></i></a>
+                                        <div style="text-align:justify;" class="col-lg-7" style="background: linear-gradient(rgba(255, 255, 255, .8), rgba(255, 255, 255, .8)), url(img/about-img-1.png);">                                            
+                                            <p class="mb-4"><?=nl2br($rw['info']);?></p>                        
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <?php
+                                }else{
+                                    ?>
+                                    <div class="container-fluid about py-3">
+                                <div class="container py-2">
+                                    <div class="row g-5 align-items-center">
+                                         <div style="text-align:right;" class="col-lg-7" style="background: linear-gradient(rgba(255, 255, 255, .8), rgba(255, 255, 255, .8)), url(img/about-img-1.png);">                                            
+                                            <p class="mb-4"><?=nl2br($rw['info']);?></p>                        
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <div class="h-60" style="border: 2px solid; border-color: transparent #13357B transparent #13357B;">
+                                                <?php
+                                                        $background="<img src='data:image/jpg;charset=utf8;base64,".base64_encode($rw['images'])."' class='img-fluid w-60 h-60' alt=''>";
+                                                ?>     
+                                                <?=$background;?>                       
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                    <?php
+                                }
+                            $x++;
                             }
                             ?>
                         </div>
