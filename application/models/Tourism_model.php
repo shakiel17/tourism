@@ -70,7 +70,7 @@
                     if($id==""){
                         $result=$this->db->query("INSERT INTO gallery(`description`,`image`,is_featured,is_background) VALUES('$description','$imgContent','$is_featured','$is_background')");
                     }else{
-                        $result=$this->db->query("UPDATE gallery SET `description`='$description',`image`='$imgContent',is_feactured='$is_featured',is_background='$is_background' WHERE id='$id'");
+                        $result=$this->db->query("UPDATE gallery SET `description`='$description',`image`='$imgContent',is_featured='$is_featured',is_background='$is_background' WHERE id='$id'");
                     }
                 }else{
                     return false;
