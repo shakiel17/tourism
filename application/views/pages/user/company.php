@@ -64,7 +64,7 @@
                                 <div class="container py-2">
                                     <div class="row g-5 align-items-center">
                                         <div class="col-lg-5">
-                                            <div class="gallery-item h-60" style="border: 2px solid; border-color: transparent #13357B transparent #13357B;">
+                                            <div class="gallery-item h-60" style="border:0; border-color: transparent #13357B transparent #13357B;">
                                                 <?php
                                                         $background="<img src='data:image/jpg;charset=utf8;base64,".base64_encode($rw['images'])."' class='img-fluid w-60 h-60' alt=''>";
                                                 ?>     
@@ -90,7 +90,7 @@
                                             <p class="mb-4"><?=nl2br($rw['info']);?></p>                        
                                         </div>
                                         <div class="col-lg-5">
-                                            <div class="gallery-item h-60" style="border: 2px solid; border-color: transparent #13357B transparent #13357B;">
+                                            <div class="gallery-item h-60" style="border:0; border-color: transparent #13357B transparent #13357B;">
                                                 <?php
                                                         $background="<img src='data:image/jpg;charset=utf8;base64,".base64_encode($rw['images'])."' class='img-fluid w-60 h-60' alt=''>";
                                                 ?>     
